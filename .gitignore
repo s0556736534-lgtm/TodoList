@@ -1,0 +1,12 @@
+# .NET (Backend)
+bin/
+obj/
+.vs/
+
+# Node.js (Frontend)
+node_modules/
+
+# Database & Misc
+*.mwb
+.DS_Store
+*.mp4

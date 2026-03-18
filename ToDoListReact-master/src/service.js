@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // הגדרת כתובת ה-API כברירת מחדל (Config Defaults)
-axios.defaults.baseURL = "http://localhost:5235";
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || "http://localhost:5235";
 
 // הוספת Interceptor לתפיסת שגיאות ב-Response
 axios.interceptors.response.use(

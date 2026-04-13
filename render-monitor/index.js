@@ -1,5 +1,6 @@
 const express = require('express');
-const sdk = require('@api/render-api');
+// const sdk = require('@api/render-api');
+const sdk = require('api')('@render-api/v1.0#972625ls09s78k');
 const app = express();
 const port = 3000;
 

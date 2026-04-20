@@ -14,14 +14,29 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // 2. הגדרת מחרוזת החיבור ל-MySQL
-var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
-if (connectionString != null && connectionString.Contains("name="))
-{
-    connectionString = connectionString.Replace("name=", "Database=");
-}
-builder.Services.AddDbContext<ToDoDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+// var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
+// if (connectionString != null && connectionString.Contains("name="))
+// {
+//     connectionString = connectionString.Replace("name=", "Database=");
+// }
+// builder.Services.AddDbContext<ToDoDbContext>(options =>
+//     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+// במקום להשתמש ב-GetConnectionString, נמשוך את הערך ישירות מה-Environment
+var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__ToDoDB");
 
+// אם זה לא נמצא ב-Environment (בזמן הרצה מקומית למשל), ננסה את הדרך הרגילה
+if (string.IsNullOrEmpty(connectionString))
+{
+    connectionString = builder.Configuration.GetConnectionString("ToDoDB");
+}
+
+builder.Services.AddDbContext<ToDoDbContext>(options =>
+{
+    if (!string.IsNullOrEmpty(connectionString))
+    {
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    }
+});
 // 3. הגדרת אימות JWT
 var secretKey = builder.Configuration["Jwt:Key"] ?? "default_secret_key_at_least_32_chars";// משיכת המפתח מה-appsettings.json
 var key = Encoding.ASCII.GetBytes(secretKey);

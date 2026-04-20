@@ -21,21 +21,12 @@ builder.Services.AddSwaggerGen();
 // }
 // builder.Services.AddDbContext<ToDoDbContext>(options =>
 //     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-// במקום להשתמש ב-GetConnectionString, נמשוך את הערך ישירות מה-Environment
-var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__ToDoDB");
-
-// אם זה לא נמצא ב-Environment (בזמן הרצה מקומית למשל), ננסה את הדרך הרגילה
-if (string.IsNullOrEmpty(connectionString))
-{
-    connectionString = builder.Configuration.GetConnectionString("ToDoDB");
-}
+// מחיקת כל הנסיונות הקודמים - כתיבה ישירה של המחרוזת שלך
+var connectionString = "Server=bjlbe5xvchnwpmdsdfgi-mysql.services.clever-cloud.com;Port=3306;Database=bjlbe5xvchnwpmdsdfgi;Uid=uc0apnhnkcrdhsng;Pwd=LBSJLeuBmWCuB1aAfSHt;";
 
 builder.Services.AddDbContext<ToDoDbContext>(options =>
 {
-    if (!string.IsNullOrEmpty(connectionString))
-    {
-        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-    }
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 // 3. הגדרת אימות JWT
 var secretKey = builder.Configuration["Jwt:Key"] ?? "default_secret_key_at_least_32_chars";// משיכת המפתח מה-appsettings.json
@@ -85,3 +76,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//Server=bjlbe5xvchnwpmdsdfgi-mysql.services.clever-cloud.com;Port=3306;Database=bjlbe5xvchnwpmdsdfgi;User=uc0apnhnkcrdhsng;Password=LBSJLeuBmWCuB1aAfSHt;

@@ -53,9 +53,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://todolistreact-master-vnp7.onrender.com") // הכתובת של ה-React
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader();    
     });
 });
 

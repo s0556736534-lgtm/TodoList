@@ -47,7 +47,7 @@ builder.Services.AddAuthentication(options =>
 // 4. הגדרת CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddDefaultPolicy(policy =>
     {
         policy.WithOrigins("https://todolistreact-master-vnp7.onrender.com") // הכתובת של ה-React
               .AllowAnyMethod()
@@ -68,7 +68,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowAll");
+app.UseCors();
 // 5. סדר ה-Middleware קריטי: קודם אימות ואז הרשאות
 app.UseAuthentication(); 
 app.UseAuthorization();

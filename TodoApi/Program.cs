@@ -56,7 +56,12 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ToDoDbContext>();
+    context.Database.EnsureCreated(); // זה יוצר את הטבלאות אם הן לא קיימות
+}
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

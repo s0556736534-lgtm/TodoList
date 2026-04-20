@@ -15,6 +15,10 @@ builder.Services.AddSwaggerGen();
 
 // 2. הגדרת מחרוזת החיבור ל-MySQL
 var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
+if (connectionString != null && connectionString.Contains("name="))
+{
+    connectionString = connectionString.Replace("name=", "Database=");
+}
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 

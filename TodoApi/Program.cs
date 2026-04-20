@@ -17,13 +17,6 @@ var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
 
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-// מחיקת כל הנסיונות הקודמים - כתיבה ישירה של המחרוזת שלך
-// var connectionString = "Server=bjlbe5xvchnwpmdsdfgi-mysql.services.clever-cloud.com;Port=3306;Database=bjlbe5xvchnwpmdsdfgi;Uid=uc0apnhnkcrdhsng;Pwd=LBSJLeuBmWCuB1aAfSHt;";
-
-// builder.Services.AddDbContext<ToDoDbContext>(options =>
-// {
-//     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-// });
 // 3. הגדרת אימות JWT
 var secretKey = builder.Configuration["Jwt:Key"] ?? "default_secret_key_at_least_32_chars";// משיכת המפתח מה-appsettings.json
 var key = Encoding.ASCII.GetBytes(secretKey);
@@ -77,5 +70,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-//Server=bjlbe5xvchnwpmdsdfgi-mysql.services.clever-cloud.com;Port=3306;Database=bjlbe5xvchnwpmdsdfgi;User=uc0apnhnkcrdhsng;Password=LBSJLeuBmWCuB1aAfSHt;

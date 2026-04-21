@@ -67,16 +67,16 @@ function App() {
         <Route path="/" element={
           !isLoggedIn ? <Navigate to="/login" /> : (
             <section className="todoapp">
-              <h5>שלום {user.userName}</h5>
               <header className="header">
-                <button onClick={handleLogout} style={{float: 'right', margin: '10px'}}>התנתק</button>
+                <button onClick={handleLogout} style={{ float: 'right', margin: '10px' }}>התנתק</button>
+                <h5>שלום {userName}</h5>
                 <h1>todos</h1>
                 <form onSubmit={createTodo}>
-                  <input 
-                    className="new-todo" 
-                    placeholder="Well, let's take on the day" 
-                    value={newTodo} 
-                    onChange={(e) => setNewTodo(e.target.value)} 
+                  <input
+                    className="new-todo"
+                    placeholder="Well, let's take on the day"
+                    value={newTodo}
+                    onChange={(e) => setNewTodo(e.target.value)}
                   />
                 </form>
               </header>
@@ -85,11 +85,11 @@ function App() {
                   {todos.map(todo => (
                     <li className={todo.isComplete ? "completed" : ""} key={todo.id}>
                       <div className="view">
-                        <input 
-                          className="toggle" 
-                          type="checkbox" 
-                          checked={todo.isComplete} 
-                          onChange={(e) => updateCompleted(todo, e.target.checked)} 
+                        <input
+                          className="toggle"
+                          type="checkbox"
+                          checked={todo.isComplete}
+                          onChange={(e) => updateCompleted(todo, e.target.checked)}
                         />
                         <label>{todo.name}</label>
                         <button className="destroy" onClick={() => deleteTodo(todo.id)}></button>

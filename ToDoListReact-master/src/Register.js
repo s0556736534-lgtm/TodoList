@@ -7,7 +7,7 @@ function Register({ onRegisterSuccess }) {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -17,6 +17,7 @@ function Register({ onRegisterSuccess }) {
       await service.register(username, password);
       setMessage("ההרשמה בוצעה בהצלחה! כעת ניתן להתחבר.");
       // אפשר להוסיף כאן השהיה קצרה ואז להעביר לדף לוגין
+      navigate("/Login"); // ודאי שהנתיב הזה תואם למה שהגדרת ב-App.js
       if (onRegisterSuccess) {
           setTimeout(() => onRegisterSuccess(), 2000);
       }

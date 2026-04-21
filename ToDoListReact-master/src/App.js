@@ -8,7 +8,8 @@ import './style.css'
 function App() {
   const [newTodo, setNewTodo] = useState("");
   const [todos, setTodos] = useState([]);
-  
+  // const [user, setUser] = useState()
+  const userName = localStorage.getItem("userName");
   // בדיקה אם המשתמש מחובר על סמך קיום טוקן ב-LocalStorage
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
@@ -66,6 +67,7 @@ function App() {
         <Route path="/" element={
           !isLoggedIn ? <Navigate to="/login" /> : (
             <section className="todoapp">
+              <h5>שלום {user.userName}</h5>
               <header className="header">
                 <button onClick={handleLogout} style={{float: 'right', margin: '10px'}}>התנתק</button>
                 <h1>todos</h1>

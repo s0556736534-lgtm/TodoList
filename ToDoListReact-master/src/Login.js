@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import service from './service';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 function Login({ onLoginSuccess }) {
   const [username, setUsername] = useState("");
@@ -14,6 +14,7 @@ function Login({ onLoginSuccess }) {
     try {
       await service.login(username, password);
       onLoginSuccess(); // פונקציה שתעדכן את מצב האפליקציה למחובר
+      localStorage.setItem("userName", username); // שמירת שם המשתמש
     } catch (err) {
       setError("שם משתמש או סיסמה שגויים");
       console.error("Login failed", err);
@@ -26,20 +27,20 @@ function Login({ onLoginSuccess }) {
       <form onSubmit={handleSubmit}>
         <div>
           <label>שם משתמש:</label>
-          <input 
-            type="text" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
-            required 
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
         <div>
           <label>סיסמה:</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}

@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import service from './service';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 
 function Register({ onRegisterSuccess }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -17,7 +16,6 @@ function Register({ onRegisterSuccess }) {
       await service.register(username, password);
       setMessage("ההרשמה בוצעה בהצלחה! כעת ניתן להתחבר.");
       // אפשר להוסיף כאן השהיה קצרה ואז להעביר לדף לוגין
-      navigate("/Login"); // ודאי שהנתיב הזה תואם למה שהגדרת ב-App.js
       if (onRegisterSuccess) {
           setTimeout(() => onRegisterSuccess(), 2000);
       }
